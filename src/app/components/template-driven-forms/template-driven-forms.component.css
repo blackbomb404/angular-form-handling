@@ -1,0 +1,78 @@
+:host {
+  display: flex;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+  }
+  .full { width: 100%; }
+
+  mat-form-field {
+    margin-bottom: .25rem;
+  }
+}
+
+.two-fields {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+  /* justify-content: space-between; */
+}
+
+.container {
+  position: relative;
+  min-width: 18rem;
+  width: 100%;
+  max-width: 32rem;
+  min-height: 40rem;
+  /* border: 1px solid gray; */
+  perspective: 1000px;
+
+  /* &:hover .card {
+    transform: rotateY(180deg);
+  } */
+
+  .card {
+    position: absolute;
+    inset: 0;
+    transition: transform 700ms cubic-bezier(.25,1.13,1,.93);
+    transform-style: preserve-3d;
+    /* border: 1px solid gray; */
+    box-shadow: 0 4px 8px rgb(0 0 0 / .12);
+
+    .front,
+    .back {
+      position: absolute;
+      inset: 0;
+      padding: 1rem;
+      backface-visibility: hidden;
+      background-color: white;
+    }
+    .front {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+
+      .register {
+        align-self: flex-end;
+
+        span {
+          margin-right: .25rem;
+        }
+      }
+    }
+    .back {
+      transform: rotateY(180deg);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+
+      .login {
+        align-self: flex-end;
+
+        span {
+          margin-right: .25rem;
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="card" [style.transform]="mode === 'register' ? 'rotateY(-180deg)' : 'rotateY(0)'">
+    <div class="front">
+
+      <h2>Login</h2>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" #emailInput="ngModel" [(ngModel)]="login.email" name="email"
+          placeholder="sample@mail.com" email required />
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" #loginPasswordInput="ngModel" [(ngModel)]="login.password" name="loginPassword" required />
+          <mat-icon matPrefix>key</mat-icon>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="full">Login</button>
+      </form>
+      <div class="register">
+        <span>Não possui uma conta?</span>
+        <button mat-button color="accent" type="button"
+          (click)="toggleMode()">Registre-se</button>
+      </div>
+    </div>
+
+    <div class="back">
+      <h2>Registro</h2>
+      <form #registerForm="ngForm" (ngSubmit)="onSubmit()" appPasswordsMatchValidator>
+        <div class="two-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Primeiro nome</mat-label>
+            <input matInput type="text" #firstNameInput="ngModel" [(ngModel)]="register.firstName" name="firstName" required />
+            @if(firstNameInput.hasError('required')){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Último nome</mat-label>
+            <input matInput type="text" #lastNameInput="ngModel" [(ngModel)]="register.lastName" name="lastName" required />
+            @if(firstNameInput.hasError('required')){
+              <mat-error>Este campo é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" #newEmailInput="ngModel" [(ngModel)]="register.email" name="email"
+          appEmailValidator required />
+          <mat-icon matPrefix>mail</mat-icon>
+          @if(newEmailInput.hasError('required')){
+            <mat-error>Este campo é obrigatório</mat-error>
+          }@else if(newEmailInput.hasError('invalidEmail')){
+            <mat-error>Este formato de email é inválido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" #registerPasswordInput="ngModel" [(ngModel)]="register.password" name="registerPassword"
+            appPasswordValidator required />
+          <mat-icon matPrefix>key</mat-icon>
+          @if(registerPasswordInput.hasError('required')){
+            <mat-error>Este campo é obrigatório</mat-error>
+          }@else if(registerPasswordInput.hasError('invalidPassword')){
+            <mat-error>{{registerPasswordInput.getError('invalidPassword').message}}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Confirmar password</mat-label>
+          <input matInput type="password" #registerConfirmPasswordInput="ngModel" [(ngModel)]="register.confirmPassword" name="registerConfirmPassword" required />
+          <mat-icon matPrefix>key</mat-icon>
+          @if(registerConfirmPasswordInput.hasError('required')){
+            <mat-error>Este campo é obrigatório</mat-error>
+          }
+        </mat-form-field>
+
+        @if (registerPasswordInput.dirty && registerConfirmPasswordInput.dirty && registerForm.hasError('passwordsMismatch')) {
+          <mat-error>Passwords do not match</mat-error><br/>
+        }
+        <button mat-raised-button color="primary" type="submit" class="full">Registrar</button>
+      </form>
+      <div class="login">
+        <span>Já possui uma conta?</span>
+        <button mat-button color="accent" type="button"
+          (click)="toggleMode()">Faça o Login</button>
+      </div>
+    </div>
+
+  </div>
+</div>
