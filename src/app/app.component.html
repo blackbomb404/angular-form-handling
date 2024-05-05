@@ -4,7 +4,7 @@
     <ul>
       @for (link of links; track $index) {
         <li>
-          <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="link.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             {{link.text}}
           </a>
         </li>

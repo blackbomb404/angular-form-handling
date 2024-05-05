@@ -31,6 +31,16 @@ import { MatButtonModule } from '@angular/material/button';
       border: 1px solid gray;
       padding: .5rem;
     }
+    nav a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: rgb(0 0 0 / .5);
+
+      &.active{
+        color: #3366cc;
+        font-weight: 500;
+      }
+    }
   `
 })
 export class AppComponent {
